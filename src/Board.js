@@ -7,33 +7,48 @@ class Board extends Component {
 		this.state = {
 			notes: [
 				{
-					id: 33,
-					note: "get groceries"
+					id: 0,
+					note: "Call Lisa"
 				},
 				{
-					id:34,
-					note: "email Fred"
+					id: 1,
+					note: "Email John"
+				},
+				{
+					id: 2,
+					note: "Order printer ink"
 				}
 			]
 		}
 		this.eachNote = this.eachNote.bind(this)
+		this.update = this.update.bind(this)
+	}
+
+	update(newText, i) {
+		console.log('updating item at index', i, newText)
+		this.setState(prevState => ({
+			notes: prevState.notes.map(
+				note => (note.id !== i) ? note : {...note, note: newText}
+			)
+		}))
 	}
 
 	eachNote(note, i) {
 		return (
 			<Note key={i}
-			      index={i}>
-			      {note.note}
-			</Note>
-		)	
+				  index={i}
+				  onChange={this.update}>
+				  {note.note}
+		    </Note>
+		)
 	}
 
 	render() {
-		return(
-				<div className="board">
-					{this.state.notes.map(this.eachNote)}
-				</div>
-			)
+		return (
+			<div className="board">
+				{this.state.notes.map(this.eachNote)}
+			</div>
+		)
 	}
 }
 
