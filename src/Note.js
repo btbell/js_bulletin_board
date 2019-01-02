@@ -16,7 +16,6 @@ class Note extends Component {
 		this.renderDisplay = this.renderDisplay.bind(this)
 	}
 	edit() {
-		//alert('editing note')
 		this.setState({
 			editing: true
 		})
@@ -38,8 +37,8 @@ class Note extends Component {
 		return (
 			<div className="note">
 				<form onSubmit={this.save}>
-					<textarea ref={input => this._newText = input} />
-					<button><FaSave /></button>
+					<textarea ref={input => this._newText = input}/>
+					<button id="save"><FaSave /></button>
 				</form>
 			</div>
 		)
@@ -57,12 +56,9 @@ class Note extends Component {
 		)
 	}
 	render() {
-		if(this.state.editing) {
-			return this.renderForm()
-		} else {
-			return this.renderDisplay()
-		}
+		return this.state.editing ? this.renderForm() : this.renderDisplay()
 	}
+
 }
 
 export default Note
