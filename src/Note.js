@@ -16,6 +16,15 @@ class Note extends Component {
 		this.renderDisplay = this.renderDisplay.bind(this)
 	}
 
+	componentDidUpdate() {
+		var textArea
+		if(this.state.editing) {
+			textArea = this._newText
+			textArea.focus()
+			textArea.select()
+		}
+	}
+
 	edit() {
 		this.setState({
 			editing: true
@@ -38,7 +47,8 @@ class Note extends Component {
 		return (
 			<div className="note">
 				<form onSubmit={this.save}>
-					<textarea ref={input => this._newText = input}/>
+					<textarea ref={input => this._newText = input}
+						defaultValue={this.props.children}/>
 					<button id="save"><FaSave /></button>
 				</form>
 			</div>
